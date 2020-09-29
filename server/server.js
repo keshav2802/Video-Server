@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+// Connect the app to mongodb database
+mongoose.connect('mongodb://localhost/videoServer', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Used to log everything like GET, POST, etc requests
 app.use(morgan('dev'));
 
