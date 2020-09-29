@@ -13,6 +13,10 @@ mongoose.connect('mongodb://localhost/videoServer', {
   useUnifiedTopology: true
 });
 
+app.get('/', (req, res) => {
+  res.send('App is running')
+})
+
 // Used to log everything like GET, POST, etc requests
 app.use(morgan('dev'));
 
