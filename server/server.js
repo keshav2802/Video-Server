@@ -8,6 +8,7 @@ const app = express();
 
 // Connect the app to mongodb database
 mongoose.connect('mongodb://localhost/videoServer', {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
