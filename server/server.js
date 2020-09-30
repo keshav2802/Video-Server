@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+// We can protect routes in our server by using custom middlewares.
+// We will apply these middlewares using web tokens. So we are 
+// creating a file calles checkAuth which will validate the users 
+// from the server side.
+const checkAuth = require('./middlewares/checkAuth');
+
 // Connect the app to mongodb database
 mongoose.connect('mongodb://localhost/videoServer', {
   useCreateIndex: true,
@@ -35,15 +41,14 @@ app.use(bodyParser.json());
 // and not nested objects.
 app.use(bodyParser.urlencoded({extended: false}));
 
+app.use('/api/videos', express.static('uploads'));
 
 app.use('/api/signup', require('./routes/signup'));
 app.use('/api/signin', require('./routes/signin'));
-app.use('/api/upload', require('./routes/upload'));
+app.use('/api/upload', checkAuth, require('./routes/upload'));
 
 let port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 })
-
-

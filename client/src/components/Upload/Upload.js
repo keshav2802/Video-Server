@@ -50,6 +50,11 @@ class Upload extends Component {
       data.append('file', this.state.selectedVideos[i]);
     }
     axios.post('/api/upload', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userTokenTime')).token
+      }
+    }, {
       onUploadProgress: ProgressEvent => {
         this.setState({
           loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)

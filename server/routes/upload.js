@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const port = require('../server');
+const thumbnailGenerator = require('../helpers/videoThumbnail');
 
 // To store the uploaded video in our local storage, we use multer
 const multer = require('multer');
@@ -22,9 +24,15 @@ const upload = multer({
 });
 
 router.post('/', upload.single('file'), (req, res, next) => {
-  res.status(200).json({
-    message: 'video upload successful'
-  })
+  thumbnailGenerator.generateThumbnail(
+    // /api/videos is made publically available in App.js
+    'http://127.0.0.1:5000' + '/api/videos/' + req.file.filename.replace(/ /g, '_'), 
+    req.file.filename.replace(/ /g, '_'),
+    req.userData.firstName);
+
+    res.status(200).json({
+      message: 'Video upload successful'
+    });
 })
 
 module.exports = router;
