@@ -9,7 +9,7 @@ Every user needs to first sign up in the app to login into it. I have implemente
 # Techs used
 
 * React.js for frontend
-* Node.js and Express.js for frontend
+* Node.js and Express.js for backend
 * MongoDB as a database
 
 # Steps to make the project:
