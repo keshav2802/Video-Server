@@ -46,6 +46,7 @@ app.use('/api/videos', express.static('uploads'));
 app.use('/api/signup', require('./routes/signup'));
 app.use('/api/signin', require('./routes/signin'));
 app.use('/api/upload', checkAuth, require('./routes/upload'));
+app.use('/api/videolist', checkAuth, require('./routes/videoList'));
 
 let port = process.env.PORT || 5000;
 
