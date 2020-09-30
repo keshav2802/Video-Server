@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/api/signup', require('./routes/signup'));
 app.use('/api/signin', require('./routes/signin'));
+app.use('/api/upload', require('./routes/upload'));
 
 let port = process.env.PORT || 5000;
 
