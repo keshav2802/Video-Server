@@ -1,6 +1,10 @@
 # Video Server
 
-This is a web app in which a user can upload videos and at the same time other users can see them. Every user needs to first sign up in the app to login into it. I have implemented user authentication. A user needs to first log in before uploading or seeing any videos. When we open the app, it shows options for login and signup. If we are already registered in the app we can directly login or else we need to signup first and then login. After a user logs in into the app the user is welcomed by the dashboard which has all the videos uploaded to the app till that moment. The user can also play the videos without downloading them. The app has drag and drop functionality with which we can just drag and drop a video inside the upload section of the app to upload it.
+This is a web app made with React, Express and MongoDB in which a user can upload videos and at the same time other users can see them.
+
+# Description
+
+Every user needs to first sign up in the app to login into it. I have implemented user authentication. A user needs to first log in before uploading or seeing any videos. When we open the app, it shows options for login and signup. If we are already registered in the app we can directly login or else we need to signup first and then login. After a user logs in into the app the user is welcomed by the dashboard which has all the videos uploaded to the app till that moment. The user can also play the videos without downloading them. The app has drag and drop functionality with which we can just drag and drop a video inside the upload section of the app to upload it.
 
 # Techs used
 
