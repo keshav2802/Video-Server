@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
+import NavBar from '../NavBar/NavBar';
 import videojs from 'video.js';
 import './videojs.css';
 
@@ -50,9 +50,10 @@ class VideoPlayer extends Component {
   }
 
   render() {
-    if (!localStorage.getItem('userTokenTime')) return <Redirect to="/signIn" />
+    if (!localStorage.getItem('userTokenTime')) return <Redirect to="/signin" />
     return (
       <React.Fragment>
+        <NavBar />
         <div className="row" style={{ width: "100vw" }}>
           <div className="col-xs-12 col-sm-12 col-md-10 col-lg-8 mx-auto mt-5">
             {this.state.loaded ? (

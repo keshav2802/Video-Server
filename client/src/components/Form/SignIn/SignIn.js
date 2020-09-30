@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Form from '../Form';
 import '../Form.css';
 import axios from 'axios';
@@ -34,7 +34,7 @@ class SignIn extends Component {
           time: new Date().getTime()
         }
         localStorage.setItem('userTokenTime', JSON.stringify(data));
-        
+        this.props.history.push("/");
       }).catch(err => {
         console.log(err);
       });
@@ -56,6 +56,7 @@ class SignIn extends Component {
   }
 
   render() {
+    if(this.state.redirect) return <Redirect to = "/" />
     return (
       <Form onSubmit={this.onSubmitHandler}>
         <h3 className="text-center text-info">Login</h3>
@@ -82,7 +83,7 @@ class SignIn extends Component {
             required />
         </div>
         <div className="d-flex justify-content-between align-items-end">
-          <button onClick={this.onSubmitHandler} className="btn btn-info btn-md" type="button">Submit</button>
+          <button onClick={this.onSubmitHandler} className="btn btn-info btn-md" type="button">Sign In</button>
           <Link to="/signup" className="text-info">Sign Up here</Link>
         </div>
       </Form>

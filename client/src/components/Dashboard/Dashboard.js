@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import './Dashboard.css';
+import NavBar from '../NavBar/NavBar';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -68,12 +69,15 @@ class Dashboard extends Component {
     });
 
     return (
+      <React.Fragment>
+        <NavBar />
         <div className="container mt-5">
           <h2>Videos</h2>
           <div className="streams row">
             {videos}
           </div>
         </div>
+      </React.Fragment>
     );
   }
 }

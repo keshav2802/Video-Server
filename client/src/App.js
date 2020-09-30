@@ -5,6 +5,7 @@ import SignUp from './components/Form/SignUp/SignUp';
 import Upload from './components/Upload/Upload';
 import Dashboard from './components/Dashboard/Dashboard';
 import VideoPlayer from './components/VideoPlayer/VideoPlayer';
+import SignOut from './components/SignOut/SignOut';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/upload" component={Upload} />
+      <Route exact path="/signout" component={SignOut} />
     </React.Fragment>
   );
 }

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
-import { Progress } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './Upload.css';
+import NavBar from '../NavBar/NavBar';
 
-class Upload extends Component {
+class Upload extends React.Component {
   state = {
-    selectedVideos: null,
-    loaded: 0
+    selectedVideos: null
   }
 
   maxSelectFile(event) {
@@ -39,7 +39,6 @@ class Upload extends Component {
     if (this.maxSelectFile(event)) {
       this.setState({
         selectedVideos: files,
-        loaded: 0
       });
     }
   }
@@ -49,16 +48,10 @@ class Upload extends Component {
     for (let i = 0; i < this.state.selectedVideos.length; i++) {
       data.append('file', this.state.selectedVideos[i]);
     }
-    axios.post('/api/upload', data, {
+    axios.post('http://127.0.0.1:5000/api/upload', data, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userTokenTime')).token
-      }
-    }, {
-      onUploadProgress: ProgressEvent => {
-        this.setState({
-          loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)
-        });
       }
     }).then(res => {
       toast.success('Upload Successful');
@@ -68,26 +61,27 @@ class Upload extends Component {
   }
 
   render() {
+    if (!localStorage.getItem('userTokenTime')) return <Redirect to="/signin" />
     return (
+      <React.Fragment>
+        <NavBar />
         <div className="container mt-5">
           <div className="form-group">
             <ToastContainer />
           </div>
-          <h2>Upload Video</h2>
+          <h4>Upload Video</h4>
+          <hr className="my-4" />
 
           <form method="post" name="videoUpload" action="/api/upload" id="#" encType="multipart/form-data">
             <div className="form-group files">
-              <h5>Upload Your Videos Here</h5>
+              <label>Upload Your Videos Here</label>
               <input
                 type="file"
                 name="file"
-                className="form-control"
+                className="form-control mb-5"
                 multiple="multiple"
                 accept="video/*"
                 onChange={this.fileChangeHandler.bind(this)} />
-              <Progress max="100" color="success" value={this.state.loaded} className="mt-4 mb-1">
-                {isNaN(Math.round(this.state.loaded, 2)) ? 0 : Math.round(this.state.loaded, 2)}%
-              </Progress>
               <button
                 type="button"
                 className="btn btn-success btn-block"
@@ -96,6 +90,7 @@ class Upload extends Component {
             </div>
           </form>
         </div>
+      </React.Fragment>
     );
   }
 }
